@@ -19,8 +19,8 @@ class Graph:
         #
         # Both fields are used for the FORWARD Dijkstra's implementation:
         # the algorithm starts with
-        #   - The source node s in "perm_fwd";
-        #   - All the other nodes in "temp_fwd".
+        #   - "perm_fwd" as an empty set;
+        #   - The source node s in "temp_fwd".
         #
         'perm_fwd',
         'temp_fwd',
@@ -29,11 +29,13 @@ class Graph:
         # "temp_fwd" still applies for the two fields below, except
         # for the following:
         #   - Both fields are used for the REVERSE Dijkstra's implementation;
-        #   - The algorithm starts with the destination node t in "perm_rev", and all
-        #     the other nodes in "temp_rev".
+        #   - The algorithm starts with "perm_rev" as an empty set, and
+        #     the destination node t in "temp_rev".
+        #     
         'perm_rev',
         'temp_rev'
     )
+
 
     def __init__(self, file_json:io.TextIOWrapper):
         graph_dict = json.load(file_json)
@@ -57,17 +59,64 @@ class Graph:
 
             arc_sets[arc.tail].add( (arc.tail, arc.head) )
     
-    def reset_nodes(self):
+
+    def init_state(self, src:int, dest:int):
         """
-        Resets nodes' distance labels and predecessor/successor values,\n
-        in order to reuse the graph for further executions.
+        Resets nodes' distance labels and predecessor/successor values.
+
+        Also, initialize the sets of permanent and temporary nodes, 
+        in order to prepare the graph for an execution of
+        one of the three variants of Dijkstra's algorithm.
         """
-        for i in len(self.nodes):
-            self.nodes[i].dist_s = float('+inf')
-            self.nodes[i].dist_t = float('+inf')
-            self.nodes[i].pred = None
-            self.nodes[i].succ = None
+
+        self.__validate_src_dest(src, dest)
+        
+        self.perm_fwd = set()
+        self.temp_fwd = {src}
+
+        self.perm_rev = set()
+        self.temp_rev = {dest}
+
+        for node in self.nodes:
+            node.reset_node()
+        
+        self.nodes[src].dist_s = 0
+        self.nodes[dest].dist_t = 0
+
+        
+    def make_node_perm_fwd(self, node:int):
+        """
+        Moves the specified node from the set of temporary nodes to the
+        set of permanent nodes, for the FORWARD Dijkstra implementation.
+        """
+        self.temp_fwd.remove(node)
+        self.perm_fwd.add(node)
+
+
+    def make_node_perm_rev(self, node:int):
+        """
+        Moves the specified node from the set of temporary nodes to the
+        set of permanent nodes, for the REVERSE Dijkstra implementation.
+        """
+        self.temp_rev.remove(node)
+        self.perm_rev.add(node)
+        
     
+    def __validate_src_dest(self, src:int, dest:int):
+        num_nodes = len(self.nodes)
+
+        if not(0 <= src < num_nodes):
+            raise KeyError(
+                f"The source node {src} is not inside the range [0, {num_nodes-1}]"
+            )
+        if not(0 <= dest < num_nodes):
+            raise KeyError(
+                f"The destination node {dest} is not inside the range [0, {num_nodes-1}]"
+            )
+        if src == dest:
+            raise ValueError("The source/destination values must be different")
+
+
     def __validate_arc(self, arc:Arc, arc_sets:list[set]):
         num_nodes = len(self.nodes)
 
