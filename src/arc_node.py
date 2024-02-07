@@ -20,9 +20,14 @@ class Node:
     )
 
     def __init__(self):
+        self.reset_node()
+        self.in_arcs = list()
+        self.out_arcs = list()
+
+    def reset_node(self):
+        """Resets the distance labels and predecessor/successor values."""
         self.dist_s = float('+inf')
         self.dist_t = float('+inf')
         self.pred = None
         self.succ = None
-        self.in_arcs = list()
-        self.out_arcs = list()
+
