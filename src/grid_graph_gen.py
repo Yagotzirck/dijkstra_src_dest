@@ -52,8 +52,8 @@ def grid_graph_gen(num_side_nodes:int, max_cost:int) -> dict:
 if __name__ == '__main__':
 
     usage_msg = (
-            "\nUsage:\n"
-            "python grid_graph_gen.py <num_side_nodes> <max_cost> <output_json_filename>\n"
+        "\nUsage:\n"
+        "python grid_graph_gen.py <num_side_nodes> <max_cost> <output_json_filename>\n"
     )
     if len(sys.argv) != 4:
         print(usage_msg)

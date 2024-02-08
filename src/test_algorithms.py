@@ -90,7 +90,7 @@ class TestDijkstraRev(unittest.TestCase, TestDijkstraBase):
         self.dijkstra_func = dijkstra_rev
 
 
-class TestDijkstraRev(unittest.TestCase, TestDijkstraBase):
+class TestDijkstraBidir(unittest.TestCase, TestDijkstraBase):
     def setUp(self):
         super().base_setUp()
         self.dijkstra_func = dijkstra_bidir
