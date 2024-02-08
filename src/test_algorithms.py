@@ -3,7 +3,7 @@ from io import StringIO
 from collections import deque
 
 from graph import Graph
-from algorithms import dijkstra_fwd, dijkstra_rev
+from algorithms import dijkstra_fwd, dijkstra_rev, dijkstra_bidir
 from exceptions import NoDirectedPathError
 
 
@@ -88,6 +88,13 @@ class TestDijkstraRev(unittest.TestCase, TestDijkstraBase):
     def setUp(self):
         super().base_setUp()
         self.dijkstra_func = dijkstra_rev
+
+
+class TestDijkstraRev(unittest.TestCase, TestDijkstraBase):
+    def setUp(self):
+        super().base_setUp()
+        self.dijkstra_func = dijkstra_bidir
+
 
 if __name__ == '__main__':
     unittest.main() 
