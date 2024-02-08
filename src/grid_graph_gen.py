@@ -49,33 +49,42 @@ def grid_graph_gen(num_side_nodes:int, max_cost:int) -> dict:
     return graph_dict
 
 
-if __name__ == '__main__':
-
+def validate_args(argv) -> tuple:
     usage_msg = (
         "\nUsage:\n"
         "python grid_graph_gen.py <num_side_nodes> <max_cost> <output_json_filename>\n"
     )
-    if len(sys.argv) != 4:
+    if len(argv) != 4:
         print(usage_msg)
         quit()
 
     try:
-        num_side_nodes = int(sys.argv[1])
+        num_side_nodes = int(argv[1])
     except ValueError:
-        raise ValueError("Parameter 'num_side_nodes' must be integer")
+        print("Parameter 'num_side_nodes' must be integer")
+        quit()
 
     try:
-        max_cost = int(sys.argv[2])
+        max_cost = int(argv[2])
     except ValueError:
-        raise ValueError("Parameter 'max_cost' must be integer")
+        print("Parameter 'max_cost' must be integer")
+        quit()
     
-    output_json_filename = sys.argv[3]
+    output_json_filename = argv[3]
     if not output_json_filename.endswith('.json'):
-        raise UserWarning("Parameter 'output_json_filename' must have .json extension")
+        print("Parameter 'output_json_filename' must have .json extension")
+        quit()
     
+    return (num_side_nodes, max_cost, output_json_filename)
+
+if __name__ == '__main__':
+    num_side_nodes, max_cost, output_json_filename = validate_args(sys.argv)
+
+    print("Creating the grid graph...")
     graph_dict = grid_graph_gen(num_side_nodes, max_cost)
 
+    print("Saving the grid graph...")
+    graph_dict = grid_graph_gen(num_side_nodes, max_cost)
     with open(output_json_filename, 'w') as f:
         json.dump(graph_dict, f)
-    
     print("The grid graph has been saved.")
