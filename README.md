@@ -2,7 +2,7 @@
 A Python implementation and comparison of three Dijkstra's algorithm variants (Forward, Reverse, Bidirectional) to find the shortest path between a source node and a destination node.
 
 ## Usage
-### dikstra_cmp.py
+### dijkstra_cmp.py
 Open a command prompt and type:
 
     python dijkstra_cmp.py <json_graph> <src_node> <dest_node>
@@ -12,7 +12,7 @@ As for <json_graph>, it is the input json file having the following structure:
 
       {
 
-        "num_nodes": 6,
+        "num_nodes": <number of nodes in the graph>,
   
         "arcs": [
           [<tail1>, <head1>, <cost1>],
