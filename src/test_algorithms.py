@@ -30,11 +30,11 @@ graph_valid = """
 
 class TestDijkstraBase:
     """
-    Base class to be inherited from test classes related to each of
+    Base class to be inherited by test classes related to each of
     the three Dijkstra's variants.
     Each derived class must do the following in setUp():
         - Call super().base_setUp(), to create the test graph;
-        - define a class method "dijkstra_func", assigning to it the
+        - Define a class method "dijkstra_func", assigning it the
           Dijkstra's variant to be tested.
     """
     def base_setUp(self):

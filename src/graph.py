@@ -47,7 +47,7 @@ class Graph:
         # In order to check for duplicate arcs, we'll insert each (tail, head)
         # pair (without the cost, since two arcs with the same (tail, head)
         # values but different cost are still duplicates) inside a list of
-        # sets (one list for each node).
+        # sets (one set for each node).
         arc_sets = [set() for _ in range(num_nodes)]
 
         for curr_arc in graph_dict['arcs']:
