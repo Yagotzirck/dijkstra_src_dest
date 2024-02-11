@@ -27,7 +27,7 @@ Note that:
 - The **cost** values must be nonnegative;
 - **Duplicate arcs** *(that is, arcs sharing the same tail and head values)* and **loopback arcs** *(arcs where the tail is equal to the head, i.e. returning to the same node)* are not allowed.
 
-Once the execution of the three Dikjstra's variants terminates, the following results are shown:
+Once the execution of the three Dijkstra's variants terminates, the following results are shown:
 - The optimal path;
 - For each algorithm, the execution time and the number of nodes it marked as permanent *(less is better)*.
 

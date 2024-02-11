@@ -15,8 +15,8 @@ class Node:
     # (used for Reverse Dijkstra)
     'succ',     
 
-    'in_arcs',  # A list of Arc tuples, representing the outgoing arcs
-    'out_arcs'  # A list of Arc tuples, representing the incoming arcs
+    'in_arcs',  # A list of Arc tuples, representing the incoming arcs
+    'out_arcs'  # A list of Arc tuples, representing the leaving arcs
     )
 
     def __init__(self):
@@ -30,4 +30,3 @@ class Node:
         self.dist_t = float('+inf')
         self.pred = None
         self.succ = None
-
