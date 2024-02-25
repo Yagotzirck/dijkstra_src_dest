@@ -64,7 +64,7 @@ def print_results(
 if __name__ == '__main__':
     input_graph_json, src_node, dest_node = validate_args(argv)
 
-    print("Building the graph...", end=' ')
+    print("Building the graph...", end=' ', flush=True)
     with open(input_graph_json, 'r') as f:
         graph = Graph(f)
     print('done\n')
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     alg_perm_nodes = list() 
     
     for alg_func in alg_funcs:
-        print(f'Executing {alg_func.__name__}()...', end=' ')
+        print(f'Executing {alg_func.__name__}()...', end=' ', flush=True)
 
         start = time()
         path = alg_func(graph, src_node, dest_node)
